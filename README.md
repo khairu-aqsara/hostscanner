@@ -1,3 +1,4 @@
+[![Unit Testing](https://github.com/khairu-aqsara/hostscanner/actions/workflows/test.yml/badge.svg)](https://github.com/khairu-aqsara/hostscanner/actions/workflows/test.yml) [![Simple Tests](https://github.com/khairu-aqsara/hostscanner/actions/workflows/test-simple.yml/badge.svg)](https://github.com/khairu-aqsara/hostscanner/actions/workflows/test-simple.yml)
 # HostScanner - Network Device Discovery Tool
 
 A fast, modern, and beautiful network host discovery tool built with Go featuring a sleek Terminal UI (TUI) with professional styling.
