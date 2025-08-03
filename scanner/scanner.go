@@ -85,7 +85,7 @@ func ScanNetwork(ips []net.IP, timeout time.Duration, maxWorkers int) *ScanResul
 // worker performs host discovery for each IP.
 func worker(jobs <-chan net.IP, results chan<- Host, timeout time.Duration, wg *sync.WaitGroup) {
 	defer wg.Done()
-	
+
 	for ip := range jobs {
 		host := scanHost(ip, timeout)
 		results <- host
@@ -125,7 +125,7 @@ func scanHost(ip net.IP, timeout time.Duration) Host {
 // pingHost pings a host to check if it's alive.
 func pingHost(ip string, timeout time.Duration) (bool, error) {
 	var cmd *exec.Cmd
-	
+
 	switch runtime.GOOS {
 	case "windows":
 		cmd = exec.Command("ping", "-n", "1", "-w", fmt.Sprintf("%.0f", timeout.Seconds()*1000), ip)
@@ -143,7 +143,7 @@ func pingHost(ip string, timeout time.Duration) (bool, error) {
 // It returns an empty string if the MAC address cannot be determined.
 func getMACAddress(ip string) string {
 	var cmd *exec.Cmd
-	
+
 	switch runtime.GOOS {
 	case "windows":
 		cmd = exec.Command("arp", "-a", ip)
@@ -188,22 +188,22 @@ func getVendorFromMAC(mac string) string {
 
 	// Common vendor mappings based on OUI database
 	vendors := map[string]string{
-		"00:50:56": "VMware",
-		"08:00:27": "Oracle VirtualBox",
-		"52:54:00": "QEMU/KVM",
-		"B8:27:EB": "Raspberry Pi Foundation",
-		"DC:A6:32": "Raspberry Pi Foundation",
-		"E4:5F:01": "Raspberry Pi Foundation",
-		"00:16:3E": "Xen",
-		"00:1C:42": "Parallels",
-		"AC:DE:48": "Apple",
-		"F8:FF:C2": "Apple",
-		"28:CD:C1": "Apple",
-		"3C:07:54": "Apple",
+		"005056": "VMware",
+		"080027": "Oracle VirtualBox",
+		"525400": "QEMU/KVM",
+		"B827EB": "Raspberry Pi Foundation",
+		"DCA632": "Raspberry Pi Foundation",
+		"E45F01": "Raspberry Pi Foundation",
+		"00163E": "Xen",
+		"001C42": "Parallels",
+		"ACDE48": "Apple",
+		"F8FFC2": "Apple",
+		"28CDC1": "Apple",
+		"3C0754": "Apple",
 	}
 
 	for ouiPrefix, vendor := range vendors {
-		if strings.HasPrefix(mac, ouiPrefix) {
+		if strings.HasPrefix(oui, ouiPrefix) {
 			return vendor
 		}
 	}

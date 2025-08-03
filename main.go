@@ -402,7 +402,7 @@ func (ui *HostScannerUI) displayModernResults(result *scanner.ScanResult, ipRang
 			vendor = "[#666666]Unknown"
 		}
 
-		latency := fmt.Sprintf("%.1fms", float64(host.Latency.Nanoseconds())/1000000)
+		var latency string
 		if !host.IsAlive {
 			latency = "[#666666]N/A"
 		} else {
